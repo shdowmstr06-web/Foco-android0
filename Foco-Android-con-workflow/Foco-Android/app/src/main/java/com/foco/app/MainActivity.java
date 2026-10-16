@@ -102,7 +102,23 @@ public class MainActivity extends Activity {
         }
     }
 
+    private static final String PRO_PASSWORD = "Plastademierda123"; // contraseña del prototipo, igual que en la versión de escritorio
+
     private class AndroidFocoBridge {
+        @JavascriptInterface
+        public boolean proStatus() {
+            return getSharedPreferences("foco_license", MODE_PRIVATE).getBoolean("pro", false);
+        }
+
+        @JavascriptInterface
+        public String proActivate(String password) {
+            if (password == null || password.length() > 128 || !password.equals(PRO_PASSWORD)) {
+                return "{\"ok\":false,\"reason\":\"incorrect-password\"}";
+            }
+            getSharedPreferences("foco_license", MODE_PRIVATE).edit().putBoolean("pro", true).apply();
+            return "{\"ok\":true}";
+        }
+
         @JavascriptInterface
         public void notify(String title, String body) {
             runOnUiThread(() -> {

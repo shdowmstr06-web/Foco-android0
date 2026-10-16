@@ -7,7 +7,7 @@ function dlg(h,ok,f,cancel){const d=document.createElement('dialog');d.innerHTML
  d.querySelector('.main').onclick=()=>{d.close();f&&f();};const c=d.querySelector('.ghost');if(c)c.onclick=()=>d.close();d.onclose=()=>d.remove();d.showModal();}
 
 /* ---- Pestañas ---- */
-const TB=[['foco','🎯 Foco'],['tareas','✅ Tareas y stats'],['mascota','🐾 Mascota']];
+const TB=[['foco','🎯 Foco'],['tareas','✅ Tareas y stats'],['mascota','🐾 Mascota'],['pro','✦ Foco Pro']];
 const nav=document.createElement('nav');nav.className='tabs wide';nav.setAttribute('role','tablist');
 nav.innerHTML=TB.map(([k,l])=>`<button role="tab" data-t="${k}">${l}</button>`).join('');document.querySelector('header.top').after(nav);
 function tab(t){try{localStorage.setItem('foco-tab',t);}catch(e){}
